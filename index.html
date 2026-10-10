@@ -86,8 +86,8 @@ textarea#msg{width:100%;min-height:150px;resize:vertical;border-radius:14px;bord
 /* time scenes, full viewport width */
 .scene{flex:1;min-height:0;margin:14px 0 0;position:relative;overflow:hidden}
 #scene{width:100vw;margin-left:calc(50% - 50vw)}
-#foodScene{border-radius:18px;background:linear-gradient(#3a2818,#2b1a10 60%)}
-#foodScene:has(.sc:not([hidden])){background:linear-gradient(#3a2818,#2b1a10 60%)}
+#foodScene{border-radius:18px}
+#foodScene.on{background:linear-gradient(#3a2818,#2b1a10 60%)}
 @media (max-height:640px){
   html,body{height:auto;min-height:100%;overflow:auto}
   .app{height:auto;min-height:100dvh}
@@ -487,6 +487,7 @@ function enableNext(){
 }
 function renderRoutes(){renderOpts($('routeOpts'),ROUTES,'route')}
 function showFood(id){
+  $('foodScene').classList.add('on');
   document.querySelectorAll('#foodScene .sc').forEach(s=>{
     const on=s.classList.contains('fs-'+id);
     if(on&&!s.hasAttribute('hidden'))return;
