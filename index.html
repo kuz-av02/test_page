@@ -540,7 +540,7 @@ function themeWave(id,ev){
 function buildSummary(){
   const f=(arr,k)=>arr.find(x=>x.id===state[k]);
   const t=f(TIMES,'time'),r=f(ROUTES,'route'),fd=f(FOODS,'food');
-  $('sumRows').innerHTML=`<span>Когда</span><span>${t.t}</span><span>Где</span><span>${r.t}</span><span>Еда</span><span>${fd.t}</span>`;
+  $('sumRows').innerHTML=`<span>Когда</span><span>${t.t}</span><span>Где</span><span>${r.t}</span><span>Еда</span><span>${fd.t}</span><span>Встреча</span><span>${MEET[state.route].m}</span>`;
 }
 function reportText(){
   const f=(arr,k)=>arr.find(x=>x.id===state[k]);
