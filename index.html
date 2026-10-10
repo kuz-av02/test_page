@@ -82,7 +82,9 @@ textarea#msg{width:100%;min-height:150px;resize:vertical;border-radius:14px;bord
 @keyframes drift{to{transform:translateX(-240px)}}
 
 /* time scenes, full viewport width */
-.scene{flex:1;min-height:0;margin:14px 0 0;position:relative;overflow:hidden;border-radius:18px}
+.scene{flex:1;min-height:0;margin:14px 0 0;position:relative;overflow:hidden}
+#scene{width:100vw;margin-left:calc(50% - 50vw)}
+#foodScene{border-radius:18px}
 .nav{position:relative;z-index:2}
 .sc{position:absolute;inset:0;width:100%;height:100%;display:block;animation:scin .7s ease}
 
@@ -197,11 +199,11 @@ textarea#msg{width:100%;min-height:150px;resize:vertical;border-radius:14px;bord
       <div class="opts" id="timeOpts"></div>
     </div>
     <div class="scene" id="scene" aria-hidden="true">
-      <svg class="sc sc-day" viewBox="0 0 400 220" preserveAspectRatio="xMidYMax slice" hidden>
+      <svg class="sc sc-day" viewBox="-400 0 1200 220" preserveAspectRatio="xMidYMax slice" hidden>
         <defs><linearGradient id="gDay" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1a10"/><stop offset="1" stop-color="#d98a2b"/></linearGradient></defs>
-        <rect width="400" height="220" fill="url(#gDay)"/>
+        <rect x="-400" width="1200" height="220" fill="url(#gDay)"/>
         <circle class="sun-up" cx="300" cy="180" r="34" fill="#f2c35a"/>
-        <g class="hills"><path d="M0 190c60-30 120-30 180-10s120 25 220 0v40H0z" fill="#3a2818"/><path d="M0 205c80-20 160-20 240-5s110 15 160 5v15H0z" fill="#26190f"/></g>
+        <g class="hills" id="dHills"><path d="M0 190c60-30 120-30 180-10s120 25 220 0v40H0z" fill="#3a2818"/><path d="M0 205c80-20 160-20 240-5s110 15 160 5v15H0z" fill="#26190f"/></g><use href="#dHills" transform="translate(-400 0)"/><use href="#dHills" transform="translate(400 0)"/>
         <g class="lark" style="--d:9s;--t:0s"><g class="bob"><g class="tilt">
           <path d="M-10 4c-7 0-11 4-13 7 5-1 9-2 13-4z" fill="#d9c7ab"/>
           <path class="wing wl" d="M-3 0c-10-10-24-12-32-6 9 0 18 3 32 6z" fill="#f6ead9"/>
@@ -221,21 +223,21 @@ textarea#msg{width:100%;min-height:150px;resize:vertical;border-radius:14px;bord
           <circle cx="10" cy="-2" r="1" fill="#1a120d"/>
         </g></g></g></g>
       </svg>
-      <svg class="sc sc-sunset" viewBox="0 0 400 220" preserveAspectRatio="xMidYMax slice" hidden>
+      <svg class="sc sc-sunset" viewBox="-400 0 1200 220" preserveAspectRatio="xMidYMax slice" hidden>
         <defs><linearGradient id="gSun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1326"/><stop offset=".55" stop-color="#b43a2b"/><stop offset="1" stop-color="#f0912f"/></linearGradient></defs>
-        <rect width="400" height="220" fill="url(#gSun)"/>
+        <rect x="-400" width="1200" height="220" fill="url(#gSun)"/>
         <circle class="sun-down" cx="200" cy="120" r="40" fill="#f2c35a"/>
-        <path d="M0 160c70-25 150-25 220-5s120 20 180 0v60H0z" fill="#3a1d12"/>
+        <g id="sLand"><path d="M0 160c70-25 150-25 220-5s120 20 180 0v60H0z" fill="#3a1d12"/>
         <g fill="#1f110b" class="trees">
           <path d="M40 165l14-50 14 50z"/><path d="M90 165l18-70 18 70z"/><path d="M150 165l12-40 12 40z"/><path d="M250 165l16-60 16 60z"/><path d="M320 165l14-48 14 48z"/><path d="M365 165l10-36 10 36z"/>
         </g>
-        <rect y="165" width="400" height="55" fill="#1f110b"/>
+        <rect y="165" width="400" height="55" fill="#1f110b"/></g><use href="#sLand" transform="translate(-400 0)"/><use href="#sLand" transform="translate(400 0)"/>
       </svg>
-      <svg class="sc sc-eve" viewBox="0 0 400 220" preserveAspectRatio="xMidYMax slice" hidden>
+      <svg class="sc sc-eve" viewBox="-400 0 1200 220" preserveAspectRatio="xMidYMax slice" hidden>
         <defs><radialGradient id="gLamp" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#f2c35a" stop-opacity=".55"/><stop offset="1" stop-color="#f2c35a" stop-opacity="0"/></radialGradient></defs>
-        <rect width="400" height="220" fill="#0f0a14"/>
-        <g class="stars" fill="#f6ead9"><circle cx="40" cy="30" r="1.5"/><circle cx="120" cy="18" r="1"/><circle cx="210" cy="40" r="1.4"/><circle cx="300" cy="22" r="1"/><circle cx="360" cy="50" r="1.6"/><circle cx="170" cy="70" r="1"/><circle cx="260" cy="12" r="1.2"/><circle cx="80" cy="64" r="1.1"/></g>
-        <circle cx="330" cy="48" r="22" fill="#f6ead9"/><circle cx="322" cy="42" r="19" fill="#0f0a14"/>
+        <rect x="-400" width="1200" height="220" fill="#0f0a14"/>
+        <g class="stars" id="eStars" fill="#f6ead9"><circle cx="40" cy="30" r="1.5"/><circle cx="120" cy="18" r="1"/><circle cx="210" cy="40" r="1.4"/><circle cx="300" cy="22" r="1"/><circle cx="360" cy="50" r="1.6"/><circle cx="170" cy="70" r="1"/><circle cx="260" cy="12" r="1.2"/><circle cx="80" cy="64" r="1.1"/></g>
+        <use href="#eStars" transform="translate(-400 0)"/><use href="#eStars" transform="translate(400 0)"/><circle cx="330" cy="48" r="22" fill="#f6ead9"/><circle cx="322" cy="42" r="19" fill="#0f0a14"/><g id="eLand">
         <g fill="#1a1322" class="trees">
           <path d="M20 170c0-40 20-60 40-60s40 20 40 60z"/><path d="M110 170c0-50 25-75 50-75s50 25 50 75z"/><path d="M230 170c0-35 18-55 36-55s36 20 36 55z"/><path d="M320 170c0-45 22-68 44-68s44 23 44 68z"/>
         </g>
@@ -246,7 +248,7 @@ textarea#msg{width:100%;min-height:150px;resize:vertical;border-radius:14px;bord
         <g class="lamp" style="animation-delay:-.5s"><ellipse cx="280" cy="132" rx="45" ry="40" fill="url(#gLamp)"/><rect x="278" y="124" width="3.5" height="46" fill="#2b2233"/><circle cx="280" cy="122" r="4.5" fill="#f2c35a"/></g>
         <g class="lamp" style="animation-delay:-1.6s"><ellipse cx="360" cy="126" rx="50" ry="45" fill="url(#gLamp)"/><rect x="358" y="116" width="4" height="54" fill="#2b2233"/><circle cx="360" cy="114" r="5" fill="#f2c35a"/></g>
         <g class="eleaves" fill="#d4452c"><path class="el" style="--x:60px;--t:0s" d="M0 0c3-4 7-4 9 0-3 3-7 3-9 0z"/><path class="el" style="--x:150px;--t:-2s" fill="#f0912f" d="M0 0c3-4 7-4 9 0-3 3-7 3-9 0z"/><path class="el" style="--x:240px;--t:-4s" fill="#f2c35a" d="M0 0c3-4 7-4 9 0-3 3-7 3-9 0z"/><path class="el" style="--x:320px;--t:-1s" d="M0 0c3-4 7-4 9 0-3 3-7 3-9 0z"/><path class="el" style="--x:110px;--t:-5s" fill="#f0912f" d="M0 0c3-4 7-4 9 0-3 3-7 3-9 0z"/></g>
-        <g fill="#a85a1f" opacity=".8"><path d="M30 178c3-4 7-4 9 0-3 3-7 3-9 0z"/><path d="M90 182c3-4 7-4 9 0-3 3-7 3-9 0z"/><path d="M170 176c3-4 7-4 9 0-3 3-7 3-9 0z"/><path d="M260 184c3-4 7-4 9 0-3 3-7 3-9 0z"/><path d="M340 178c3-4 7-4 9 0-3 3-7 3-9 0z"/></g>
+        <g fill="#a85a1f" opacity=".8"><path d="M30 178c3-4 7-4 9 0-3 3-7 3-9 0z"/><path d="M90 182c3-4 7-4 9 0-3 3-7 3-9 0z"/><path d="M170 176c3-4 7-4 9 0-3 3-7 3-9 0z"/><path d="M260 184c3-4 7-4 9 0-3 3-7 3-9 0z"/><path d="M340 178c3-4 7-4 9 0-3 3-7 3-9 0z"/></g></g><use href="#eLand" transform="translate(-400 0)"/><use href="#eLand" transform="translate(400 0)"/>
       </svg>
     </div>
     <div class="nav"><button class="btn ghost" data-back>Назад</button><button class="btn" data-next disabled>Дальше</button></div>
