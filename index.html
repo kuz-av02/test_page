@@ -65,7 +65,7 @@ textarea#msg{width:100%;min-height:150px;resize:vertical;border-radius:14px;bord
 /* walker on intro */
 .hero{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;margin-top:10px}
 .walker{width:100%;height:100%;max-width:420px;max-height:100%;display:block;overflow:visible}
-.screen[data-step="5"] .walker{height:auto;max-width:300px;margin:10px auto 0}
+
 .walker .figure{transform-box:view-box;transform-origin:112px 104px;animation:bob .7s ease-in-out infinite}
 .walker .leg,.walker .arm{transform-box:view-box}
 .walker .leg{transform-origin:112px 72px}
@@ -350,14 +350,14 @@ textarea#msg{width:100%;min-height:150px;resize:vertical;border-radius:14px;bord
     <div class="nav"><button class="btn ghost" data-back>Поменять</button><button class="btn" id="sendBtn">Отправить ему</button></div>
   </section>
   <section class="screen" data-step="5">
-    <div class="scroll">
+    <div class="scroll short">
       <p class="eyebrow">Отправлено</p>
       <h2>Ушло. Теперь дело за мной.</h2>
       <p class="lead">Напишу тебе, как только всё забронирую. До встречи.</p>
+    </div>
+    <div class="hero">
       <svg class="walker" viewBox="32 12 160 108" aria-hidden="true">
-        <g class="ground">
-          <line x1="0" y1="112" x2="240" y2="112" stroke="var(--line)" stroke-width="2" stroke-dasharray="14 10" class="road"/>
-        </g>
+        <line x1="0" y1="112" x2="240" y2="112" stroke="var(--line)" stroke-width="2" stroke-dasharray="14 10" class="road"/>
         <g class="figure">
           <path class="scarf" d="M108 44c-9 2-18 6-26 3" stroke="var(--maple)" stroke-width="5" stroke-linecap="round" fill="none"/>
           <line class="leg legB" x1="112" y1="72" x2="112" y2="104" stroke="var(--muted)" stroke-width="7" stroke-linecap="round"/>
@@ -383,6 +383,12 @@ const TIMES=[
   {id:'sunset',ic:'🌇',t:'К 15–16'},
   {id:'eve',ic:'🌙',t:'Вечером, к 18'}
 ];
+const MEET={
+  gorky:{m:'метро Октябрьская (кольцевая), выход к Ленинскому проспекту, у входа в Нескучный сад',r:'55.7290,37.6112~55.7225,37.5985~55.7160,37.5840~55.7312,37.6020'},
+  vdnh:{m:'метро ВДНХ, выход к арке главного входа ВДНХ',r:'55.8215,37.6410~55.8262,37.6378~55.8300,37.6300~55.8370,37.6275'},
+  kolom:{m:'метро Коломенская, выход к проспекту Андропова и входу в парк',r:'55.6785,37.6640~55.6735,37.6648~55.6675,37.6708~55.6610,37.6690'}
+};
+const routeLink=id=>'https://yandex.ru/maps/?rtext='+MEET[id].r+'&rtt=pd';
 const ROUTES=[
   {id:'gorky',ic:'🍁',t:'Нескучный сад и Парк Горького',s:'Аллеи, набережная, мосты'},
   {id:'vdnh',ic:'🚀',t:'ВДНХ и Ботанический сад',s:'Фонтаны, павильоны, подсветка'},
@@ -540,7 +546,7 @@ function reportText(){
   const f=(arr,k)=>arr.find(x=>x.id===state[k]);
   const t=f(TIMES,'time'),r=f(ROUTES,'route'),fd=f(FOODS,'food');
   const spots=(SPOTS[state.route]||{})[state.food]||[];
-  return `🍂 Она собрала свидание\n\nКогда: ${t.t}\nГде: ${r.t}\nЕда: ${fd.t}\n\nВарианты рядом:\n${spots.map(([n,a])=>'• '+n+', '+a+'\n'+mapLink(n,a)).join('\n')}`;
+  return `🍂 Она собрала свидание\n\nКогда: ${t.t}\nГде: ${r.t}\nЕда: ${fd.t}\n\nВарианты рядом:\n${spots.map(([n,a])=>'• '+n+', '+a+'\n'+mapLink(n,a)).join('\n')}\n\n📍 Место встречи: ${MEET[state.route].m}\n🚶 Маршрут прогулки:\n${routeLink(state.route)}`;
 }
 let sending=false;
 $('sendBtn').onclick=async()=>{
