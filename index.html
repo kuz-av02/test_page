@@ -22,7 +22,7 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);
 button{font:inherit;color:inherit;cursor:pointer}
 button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 #leaves{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.6}
-.app{position:relative;z-index:1;height:100%;max-width:520px;margin:0 auto;display:flex;flex-direction:column;padding-inline:16px;padding-block:14px 18px}
+.app{position:relative;z-index:1;height:100%;height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));max-width:520px;margin:0 auto;display:flex;flex-direction:column;padding-inline:16px;padding-block:14px 18px}
 .bar{flex:none;height:4px;border-radius:4px;background:var(--line);overflow:hidden;margin-bottom:14px}
 .bar i{display:block;height:100%;width:0;background:var(--gold);border-radius:4px;transition:width .6s cubic-bezier(.4,0,.2,1)}
 .screen{display:none;flex:1;min-height:0;flex-direction:column;animation:in .35s ease}
@@ -86,11 +86,18 @@ textarea#msg{width:100%;min-height:150px;resize:vertical;border-radius:14px;bord
 /* time scenes, full viewport width */
 .scene{flex:1;min-height:0;margin:14px 0 0;position:relative;overflow:hidden}
 #scene{width:100vw;margin-left:calc(50% - 50vw)}
-#foodScene{border-radius:18px}
+#foodScene{border-radius:18px;background:linear-gradient(#3a2818,#2b1a10 60%)}
+#foodScene:has(.sc:not([hidden])){background:linear-gradient(#3a2818,#2b1a10 60%)}
+@media (max-height:640px){
+  html,body{height:auto;min-height:100%;overflow:auto}
+  .app{height:auto;min-height:100dvh}
+  .screen.on{min-height:calc(100dvh - 32px)}
+  .scene,.gallery,.hero{min-height:220px}
+  .gallery .gal-track{min-height:170px}
+}
 .nav{position:relative;z-index:2}
 .sc{position:absolute;inset:0;width:100%;height:100%;display:block;animation:scin .7s ease}
 
-#foodScene:has(.sc:not([hidden])){background:#2b1a10}
 #foodScene .sc{padding:4px}
 @keyframes scin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .sun-up{animation:sunup 3s cubic-bezier(.2,.8,.3,1) forwards}
@@ -283,7 +290,7 @@ textarea#msg{width:100%;min-height:150px;resize:vertical;border-radius:14px;bord
     </div>
     <div class="scene" id="foodScene" aria-hidden="true">
       <!-- cafe: window table, two cups, candle -->
-      <svg class="sc fs-cafe" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid meet" hidden>
+      <svg class="sc fs-cafe" viewBox="0 0 400 220" preserveAspectRatio="xMidYMax meet" hidden>
         <rect width="400" height="220" fill="#2b1a10"/>
         <rect x="60" y="20" width="280" height="120" rx="8" fill="#6c4a2b"/><rect x="70" y="30" width="260" height="100" rx="4" fill="#d9a44a"/>
         <g fill="#b8381c"><ellipse cx="120" cy="70" rx="26" ry="22"/><ellipse cx="200" cy="60" rx="32" ry="26"/><ellipse cx="285" cy="72" rx="28" ry="22"/></g>
@@ -296,7 +303,7 @@ textarea#msg{width:100%;min-height:150px;resize:vertical;border-radius:14px;bord
         <rect x="196" y="168" width="8" height="26" fill="#f6ead9"/><path class="flame" d="M200 150c6 8 6 14 0 18-6-4-6-10 0-18z" fill="#f2c35a"/><ellipse cx="200" cy="194" rx="12" ry="3" fill="#8a5a2b"/>
       </svg>
       <!-- pizza: big pizza on a board, slice lifted -->
-      <svg class="sc fs-pizza" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid meet" hidden>
+      <svg class="sc fs-pizza" viewBox="0 0 400 220" preserveAspectRatio="xMidYMax meet" hidden>
         <rect width="400" height="220" fill="#2b1a10"/>
         <rect x="0" y="150" width="400" height="70" fill="#4a2e18"/>
         <ellipse cx="200" cy="150" rx="150" ry="40" fill="#8a5a2b"/>
@@ -308,7 +315,7 @@ textarea#msg{width:100%;min-height:150px;resize:vertical;border-radius:14px;bord
         <g class="shake" style="--t:-1.3s"><path d="M296 92h52l-6 84h-40z" fill="#f6ead9"/><path d="M300 96h44l-5 72h-34z" fill="#c98f3f"/><ellipse cx="322" cy="94" rx="27" ry="8" fill="#f6ead9"/><path d="M304 92c6-14 30-14 36 0-6-6-30-6-36 0z" fill="#f6ead9"/><path d="M314 80l8 8 8-8" stroke="#6b3a1a" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="330" y="40" width="5" height="50" rx="2" fill="#d4452c" transform="rotate(-8 332 65)"/></g>
       </svg>
       <!-- fast food: burger, fries, cup -->
-      <svg class="sc fs-fast" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid meet" hidden>
+      <svg class="sc fs-fast" viewBox="0 0 400 220" preserveAspectRatio="xMidYMax meet" hidden>
         <rect width="400" height="220" fill="#2b1a10"/>
         <rect x="0" y="160" width="400" height="60" fill="#4a2e18"/>
         <g class="burger"><ellipse cx="200" cy="92" rx="70" ry="28" fill="#e8a04a"/><g fill="#f6ead9"><circle cx="175" cy="80" r="2"/><circle cx="200" cy="74" r="2"/><circle cx="225" cy="82" r="2"/><circle cx="190" cy="90" r="2"/><circle cx="212" cy="92" r="2"/></g>
@@ -317,7 +324,7 @@ textarea#msg{width:100%;min-height:150px;resize:vertical;border-radius:14px;bord
         <g class="cup"><path d="M300 90h56l-6 78h-44z" fill="#f0912f"/><rect x="296" y="84" width="64" height="10" rx="3" fill="#f6ead9"/><rect x="318" y="40" width="6" height="50" fill="#d4452c"/><path d="M308 118h40" stroke="#f6ead9" stroke-width="4"/></g>
       </svg>
       <!-- coffee & sweets: latte with heart, croissant, cake -->
-      <svg class="sc fs-coffee" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid meet" hidden>
+      <svg class="sc fs-coffee" viewBox="0 0 400 220" preserveAspectRatio="xMidYMax meet" hidden>
         <rect width="400" height="220" fill="#2b1a10"/>
         <rect x="0" y="160" width="400" height="60" fill="#4a2e18"/>
         <g class="cup"><ellipse cx="200" cy="162" rx="48" ry="8" fill="#1a120d" opacity=".5"/><path d="M150 100h100v40c0 18-14 30-30 30h-40c-16 0-30-12-30-30z" fill="#f6ead9"/><path d="M250 110h10a12 12 0 0 1 0 24h-10" stroke="#f6ead9" stroke-width="7" fill="none"/><ellipse cx="200" cy="100" rx="50" ry="10" fill="#c98f3f"/><path d="M200 108c-6-8-18-6-16 4 2 8 16 12 16 12s14-4 16-12c2-10-10-12-16-4z" fill="#f6ead9"/></g>
@@ -469,7 +476,7 @@ function renderOpts(el,items,key,disabledFn){
 }
 function progress(){
   const keys=['time','route','food'];
-  const answered=step>=4?3:keys.slice(0,Math.max(0,step)).filter(k=>state[k]).length;
+  const answered=step>=4?3:keys.filter(k=>state[k]).length;
   fill.style.width=(answered/3*100)+'%';
 }
 function enableNext(){
